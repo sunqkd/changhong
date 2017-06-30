@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<link rel="stylesheet" type="text/css" href="css/shop.css" />
+<link rel="stylesheet" type="text/css" href="css/bottom.css"/>
+<script type="text/javascript" src = "js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src = "js/jquery.cookie.js"></script>
+<title>四川长虹</title>
+<style type="text/css">
+.active{
+	background:#e42121;
+}
+#myhong,#shopcar{width:100px;}
+</style>
+<script type="text/javascript">
+function television(data){
+	for(var i = 0; i<4;i++){
+		$(".goodslist li").find("img").eq(i).attr("src",data[i].img);
+		$(".goodslist li").find("p").eq(i).html(data[i].id);
+		$(".goodslist li").find("span").eq(i).html(data[i].price);
+	}	
+}
+function condition(data){
+	for(var i = 0; i<4;i++){
+		$(".goodslist li").find("img").eq(i).attr("src",data[i].img);
+		$(".goodslist li").find("p").eq(i).html(data[i].id);
+		$(".goodslist li").find("span").eq(i).html(data[i].price);
+	}	
+}
+function refrigerator(data){
+	for(var i = 0; i<4;i++){
+		$(".goodslist li").find("img").eq(i).attr("src",data[i].img);
+		$(".goodslist li").find("p").eq(i).html(data[i].id);
+		$(".goodslist li").find("span").eq(i).html(data[i].price);
+	}	
+}
+function appliances(data){
+	for(var i = 0; i<4;i++){
+		$(".goodslist li").find("img").eq(i).attr("src",data[i].img);
+		$(".goodslist li").find("p").eq(i).html(data[i].id);
+		$(".goodslist li").find("span").eq(i).html(data[i].price);
+	}	
+}
+</script>
+</head>
+<script type="text/javascript">
+$(function(){
+	$("#login").click(function(){
+	open("02login.html","02login");
+})
+$("#register").click(function(){
+	open("01register.html","01register");
+})
+//----------------我的长虹选项卡
+    $("#myhong").hover(function(){
+    	$("#my").css("display","block");
+    },function(){
+    	$("#my").css("display","none");
+    })
+
+//---------------------搜索框-------
+    //获得焦点触发事件
+    $("#firstinp").focus(function(){ 
+    	$(this).attr("placeholder",null);
+    	$(".uls").css("display","block");
+    })
+    //失去焦点
+    $("#firstinp").blur(function(){ 
+    	$(this).attr("placeholder","Q5N");
+    	$(".uls").css("display","none");
+    })
+//--------------------电视选项卡---------
+    $(".television").hover(function(){
+    	$(".tab1").stop().animate({height:230},300);
+    // 动态创建script  
+    $("<script/>").attr("src","json/01television.json").appendTo($("body"));
+    },function(){
+       // $(".tab1").stop().animate({height:0},300);
+    	$("body").find("script").remove();
+    })
+//----------------空调选项卡------------
+    $(".air-condition").hover(function(){
+    	$(".tab1").stop().animate({height:230},300);
+    	$("<script/>").attr("src","json/02air-condition.json").appendTo($("body"));
+    },function(){
+    	// $(".tab1").stop().animate({height:0},300);
+    	$("body").find("script").remove();
+    })
+//----------------冰箱选项卡------------
+    $(".refrigerator").hover(function(){
+      $(".tab1").stop().animate({height:230},300);
+      $("<script/>").attr("src","json/03refrigerator.json").appendTo($("body"));   	
+    },function(){
+    	// $(".tab1").stop().animate({height:0},300);
+    	$("body").find("script").remove();
+    })
+//------------- 生活家电选项卡----------
+	$(".appliances").hover(function(){
+      $(".tab1").stop().animate({height:230},300);
+      $("<script/>").attr("src","json/04appliances.json").appendTo($("body"));  		
+	},function(){
+    	$("body").find("script").remove();
+	})	
+	
+//收上去
+	$(".tab1").hover(function(){
+		//$(this).css("height","230px");
+	},function(){
+		$(this).stop().animate({height:0},300);
+	})
+//首页服务添加事件
+$("#head").mouseenter(function(){
+	$(".tab1").stop().animate({height:0},300);
+})
+$(".fp").mouseenter(function(){
+	$(".tab1").stop().animate({height:0},300);
+})
+$(".serve").mouseenter(function(){
+	$(".tab1").stop().animate({height:0},300);
+})
+//轮播开始-----------------------------------
+var wrap = document.getElementById('wrap');
+var oimg = wrap.getElementsByTagName('a');
+var ul_index = document.getElementById("ul_index");
+var lis = ul_index.getElementsByTagName("li");
+
+var index = 0;//记录图片所在的下标位置(全局)
+//TODO 切换图片
+function changeImage(){
+	oimg[index].style.opacity=0;//隐藏之前的图片
+	index++;
+	if(index==4){//既第超过最后一张时，就设置为0，既第一张）
+		index=0;
+	}
+	//显示切换后的图片
+	oimg[index].style.opacity = 1;
+	//改变圆点
+	changePoint();
+}
+//添加定时器
+var timer=setInterval(changeImage,4000);
+
+//TODO 切换圆点
+function changePoint(){
+	for(var i=0;i<lis.length;i++){
+		//找到与图片下标对应的圆点
+		if(index==i){
+			//图片对应的圆点背景为
+			lis[i].style.backgroundColor='#e42121';
+		}else{
+			//其他为
+			lis[i].style.backgroundColor='#e2dedb';
+		}
+	}
+}
+//TODO 鼠标移入时清除定时器
+wrap.onmouseenter=function(){
+	clearInterval(timer);
+}
+//TODO 鼠标移出时开启新的定时器
+wrap.onmouseleave=function(){
+	timer=setInterval(changeImage,4000);
+}
+
+//TODO 为圆点添加移入移出事件 事件在鼠标指针移动到元素上时触发
+for(var i=0;i<lis.length;i++){
+	//鼠标移入事件
+	lis[i].onmouseenter=function(){
+		oimg[index].style.opacity=0;//隐藏其他图片
+		for(var j=0;j<lis.length;j++){
+			//找到移入当前圆点对应的下标
+			if(this==lis[j]){ 
+				index=j;//找到对应图片的下标
+			}
+		}
+		//显示圆点对应的图片
+		oimg[index].style.opacity=1;
+		//改变分页数   圆点的位置
+		changePoint();
+	}
+}
+//轮播结束---------------------------------------
+/*右边选项卡加载数据开始*/
+$("#tab2").find("a").mouseenter(function(){
+	  $(".tab2_right").css("display","block");
+	    var index = $(this).index();
+	$.ajax({
+		url:"ajax/01ajax.json",
+		type:"GET",
+		success:function(data){
+			switch(index){
+				case 0:
+					for(var i =0;i<4;i++){				    			
+						$("#uls_r").find("span").eq(i).html(data[i].title);
+						$("#uls_r").find("img").eq(i).attr("src",data[i].img);
+			            $("#uls_r").find("p").eq(i).html(data[i].model);		
+			        }
+					break;
+				case 1:
+					for(var i =0;i<4;i++){				    			
+						$("#uls_r").find("span").eq(i).html(data[i+4].title);
+						$("#uls_r").find("img").eq(i).attr("src",data[i+4].img);
+			            $("#uls_r").find("p").eq(i).html(data[i+4].model);
+			        }				    
+					break;
+				case 2:
+					for(var i =0;i<4;i++){				    			
+						$("#uls_r").find("span").eq(i).html(data[i+8].title);
+						$("#uls_r").find("img").eq(i).attr("src",data[i+8].img);
+			            $("#uls_r").find("p").eq(i).html(data[i+8].model);
+			        }				    
+					break;
+				case 3:
+					for(var i =0;i<4;i++){				    			
+						$("#uls_r").find("span").eq(i).html(data[i+12].title);
+						$("#uls_r").find("img").eq(i).attr("src",data[i+12].img);
+			            $("#uls_r").find("p").eq(i).html(data[i+12].model);
+			        }				
+					break;
+				case 4:
+					for(var i =0;i<4;i++){				    			
+						$("#uls_r").find("span").eq(i).html(data[i+16].title);
+						$("#uls_r").find("img").eq(i).attr("src",data[i+16].img);
+			            $("#uls_r").find("p").eq(i).html(data[i+16].model);
+			        }				
+				    break;
+				case 5:
+					for(var i =0;i<4;i++){				    			
+						$("#uls_r").find("span").eq(i).html(data[i+20].title);
+						$("#uls_r").find("img").eq(i).attr("src",data[i+20].img);
+			            $("#uls_r").find("p").eq(i).html(data[i+20].model);
+			        }				
+				    break;
+				case 6:
+					for(var i =0;i<4;i++){				    			
+						$("#uls_r").find("span").eq(i).html(data[i+24].title);
+						$("#uls_r").find("img").eq(i).attr("src",data[i+24].img);
+			            $("#uls_r").find("p").eq(i).html(data[i+24].model);
+			        }				
+				    break;					
+			}
+		}
+	})
+})
+//
+$(".tab2").delegate("a","mouseout",function(){
+	$(".tab2_right").css("display","none");
+});
+
+$(".tab2_right").hover(function(){
+	$(this).css("display","block");
+},function(){
+	$(this).css("display","none");
+})
+/*右边选项卡加载数据结束*/
+/*shop-tv请求ajax数据*/
+$.ajax({
+	url:"ajax/02shop_tv.json",
+	type:"GET",
+	success:function(data){
+		//alert(data.length);// 创建
+		var html="";
+		for(var i=0;i < 8;i++){			
+			html+='<li id="'+data[i].id+'"><div><img src="'+data[i].img+'"/><p>'+data[i].name+'</p><p>'+data[i].time+'</p><p>'+data[i].price+'</p></div></li>';
+			$(".laser_ul").html(html);
+		}		
+	}
+})
+/*shop-air数据加载*/
+$.ajax({
+	url:"ajax/03shop_air.json",
+	type:"GET",
+	success:function(data){
+		//alert(data.length);// 创建
+		var html="";
+		for(var i=0;i < 8;i++){			
+			html+='<li id="'+data[i].id+'"><div><img src="'+data[i].img+'"/><p>'+data[i].name+'</p><p>'+data[i].time+'</p><p>'+data[i].price+'</p></div></li>';
+			$(".laser_condition").html(html);
+		}		
+	}
+})
+/*冰箱数据加载*/
+$.ajax({
+	url:"ajax/04shop_cool.json",
+	type:"GET",
+	success:function(data){
+		//alert(data.length);// 创建
+		var html="";
+		for(var i=0;i < 8;i++){			
+			html+='<li id="'+data[i].id+'"><div><img src="'+data[i].img+'"/><p>'+data[i].name+'</p><p>'+data[i].time+'</p><p>'+data[i].price+'</p></div></li>';
+			$(".laser_cool").html(html);
+		}
+		/*写在此处*/
+         $("#22").click(function(){
+    	    open("subpage.html","subpage");
+         })		
+	}
+})
+
+/*生活家电数据加载*/
+$.ajax({
+	url:"ajax/05shop_life.json",
+	type:"GET",
+	success:function(data){
+		//alert(data.length);// 创建
+		var html="";
+		for(var i=0;i < 8;i++){			
+			html+='<li id="'+data[i].id+'"><div><img src="'+data[i].img+'"/><p>'+data[i].name+'</p><p>'+data[i].time+'</p><p>'+data[i].price+'</p></div></li>';
+			$(".laser_life").html(html);
+		}		
+	}
+})
+/*周边数据加载*/
+$.ajax({
+	url:"ajax/06shop_around.json",
+	type:"GET",
+	success:function(data){
+		//alert(data.length);// 创建
+		var html="";
+		for(var i=0;i < 4;i++){			
+			html+='<li id="'+data[i].id+'"><div><img src="'+data[i].img+'"/><p>'+data[i].name+'</p><p>'+data[i].time+'</p><p>'+data[i].price+'</p></div></li>';
+			$(".laser_around").html(html);
+		}		
+	}
+})
+
+})
+</script>
+<script type="text/javascript">
+$(function(){
+	document.onscroll = function(){
+	var scrollTop = document.body.scrollTop||document.documentElement.scrollTop;
+
+		if(scrollTop>=480){
+		  $(".lastli").css("display","block");
+		}else{
+		  $(".lastli").css("display","none");
+		}
+
+if(scrollTop>=480&&scrollTop<=3700){
+	$(".fixed").css("display","block");
+
+		if(scrollTop>=480&&scrollTop<600){
+			$(".hot li").css({background:"#f9f9f9",color:"#666666"});
+			$(".hot li:eq(0)").css({background:"#ee1411",color:"white"});
+		}else if(scrollTop>600&&scrollTop<1320){
+			$(".hot li").css({background:"#f9f9f9",color:"#666666"});
+			$(".hot li:eq(1)").css({background:"#ee1411",color:"white"});
+		}else if(scrollTop>1320&&scrollTop<=2040){
+			$(".hot li").css({background:"#f9f9f9",color:"#666666"});
+			$(".hot li:eq(2)").css({background:"#ee1411",color:"white"});		
+		}else if(scrollTop>2040&&scrollTop<=2760){
+			$(".hot li").css({background:"#f9f9f9",color:"#666666"});
+			$(".hot li:eq(3)").css({background:"#ee1411",color:"white"});
+		}else if(scrollTop>2760&&scrollTop<=3480){
+			$(".hot li").css({background:"#f9f9f9",color:"#666666"});
+			$(".hot li:eq(4)").css({background:"#ee1411",color:"white"});
+		}else{
+			$(".hot li").css({background:"#f9f9f9",color:"#666666"});
+			$(".hot li:eq(5)").css({background:"#ee1411",color:"white"});			
+		}
+	}else{
+		$(".fixed").css("display","none");
+	}
+	document.title = scrollTop;
+	}
+})
+</script>
+<body>
+<!-- 开头部分开始 -->
+<div class = "q_4">
+<div id = "head" class = "head">
+	<div class = "left">
+	 	<a href="#" class = "active">长虹官网</a>
+	 	<a href="#">关于长虹</a>
+	 	<a href="#">商务合作</a>
+	 	<a href="#">English</a>
+	</div>
+	<div class = "right">
+	 	<a id = "register" href ="#">登录&ensp;&ensp;</a>
+	 	<a id = "login" href ="#">&ensp;注册</a>
+	 	<a id = "myhong" class="myhong" href = "#">我的长虹</a>
+	 	<a href = "#">消息</a>
+	 	<a href ="#">(0)</a>
+	 	<a id = "shopcar" class="shopcar" href = "#">购物车</a>
+		 	<div id = "my" class = "my">
+		 		<img src = "img/my.png">
+		 		<div class = "load">
+		 	     <p><a href = "#" class = "firsta">您好请先登录</a></p>
+		 	     <p><a href = "#" class = "seconda">账户设置</a></p>
+		 		</div>
+		 		<div class = "downa">
+		 			<p><a href = "#" class = "commen">我的订单&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</a><a href = "#">我的预约</a></p>
+		 			<p><a href = "#" class = "commen">家电管家&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</a><a href = "#">服务记录</a></p>
+		 			<p><a href = "#" class = "commen">我的积分&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</a><a href = "#">我的优惠券</a></p>
+		 			<p><a href = "#">我的收藏</a></p>
+		 	   </div>
+		    </div>
+		    <div id = "you" class = "you">
+		        <p class = "present">购物车没有商品,赶快购物吧</p>
+		 	    <ul class = "wuliaoshop">
+		 	    </ul>
+		 	    <div class = "jiesuan">
+		 	    	 <div class = "kj_right">
+		 	    	 	<p class = "kj_sum"></p>
+		 	    	 	<p class = "kj_price">总价：
+		 	    	 		<span class = "true_p" style="color:red"></span>
+		 	    	 	</p>
+		 	    	 </div>
+		 	    	 <button class="kj">立即结算</button>
+		 	    </div>
+		    </div>
+	</div>
+</div>
+</div>
+<!-- 开头结束 -->
+<!-- 导航栏部分开始 -->
+<div id = "out">
+<div class = "navigation" id = "navigation">
+	<div class = "nav_left">
+		<img src = "img/logo.png" />
+	</div>
+	<div class = "nav_right">
+		<a href="#" class = "fp" style = "color:red">首页</a>
+		<a href="#" class = "television">电视</a>
+		<a href="#" class = "air-condition">空调</a>
+		<a href="#" class = "refrigerator">美菱冰洗</a>
+		<a href="#" class = "appliances">生活家电</a>
+		<a href="#" class = "serve">服务</a>
+		<a href="#">社区</a>
+		<div class= "inputdiv">
+		<input id = "firstinp" class= "firstinp" type ="text" placeholder = "Q5N"/>
+		<input class = "secondinput" type = "button" />	
+	        <ul class = "uls">
+	        	<li>人工智能新产品</li>
+	            <li>会员福利</li>
+	        </ul>
+		</div>		
+	</div>
+</div>
+</div>
+<!-- 导航栏部分结束 -->
+<!-- 选项卡一次性编写开始 -->
+<div class = "out">
+	<div id ="tab1" class = "tab1">
+		 <div class = "recommend">
+		 	热门推荐
+		 </div>
+		 <div class = "goods">
+		 	<ul class = "goodslist">
+		 		<li>
+		 		    <img />
+		 			<p></p>
+		 			<span style="color:red"></span>
+		 		</li>
+		 		<li>
+		 		    <img  />
+		 			<p></p>
+		 			<span style="color:red"></span>
+		 		</li>
+		 		<li>
+		 			<img />
+		 			<p></p>
+		 			<span style="color:red"></span>
+		 		</li>
+		 		 <li>
+		 			<img  />
+		 			<p></p>
+		 			<span style="color:red"></span>
+		 		 </li>
+		 	 </ul>
+		  </div>
+	 </div>
+</div>
+<!-- 选项卡结束 -->
+<!-- 滚动窗口开始 -->
+<div class="wrap" id="wrap">
+    <!--轮播图-->  
+    <a href=""><img src="img/1.png"></a>
+    <a href=""><img src="img/2.jpg"></a>
+    <a href=""><img src="img/3.jpg"></a>
+    <a href=""><img src="img/4.jpg"></a>
+    <!--分页-->
+    <ul class="ul_index" id = "ul_index">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<!-- 滚动结束 -->
+<!-- 侧边选项卡开始 -->
+<div class = "tab2" id = "tab2">
+	<a href="#">启课系列</a>
+	<a href="#">平板电视</a>
+	<a href="#">空调产品</a>
+	<a href="#">美菱冰洗</a>
+	<a href="#">生活家电</a>
+	<a href="#">数码影音</a>
+	<a href="#">周边其他</a>
+</div>
+<div class = "tab2_right">
+	<ul id = "uls_r">
+		<li>
+			<div>
+			    <img />
+				<span></span>
+			</div>
+			<p></p>
+		</li>
+		<li>
+			<div>
+			    <img />
+				<span></span>
+			</div>
+			<p></p>
+		</li>
+		<li>
+			<div>
+			    <img />
+				<span></span>
+			</div>
+			<p></p>			
+		</li>
+		<li>
+			<div>
+			    <img />
+				<span></span>
+			</div>
+			<p></p>			
+		</li>
+	</ul>
+</div>
+<!-- 右侧选项卡结束 -->
+<div class = "notice">
+	<div class = "notice_1">
+		<span>关于公告</span>
+		<span>2017-6-22</span>
+	</div>
+</div>
+<div class = "q_1"> 
+	<div class = "community" id = "community">
+		<img src = "img/community.png" />
+		<img src = "img/jidan.png" />
+		<img src = "img/jiaquan.jpg" />
+		<img src = "img/member.jpg" />
+	</div>
+</div>
+<!-- 电视商城导航开始 -->
+<div class = "q_2">
+<div class = "shop_tv" id = "ooo">
+	<div class = "shop_right">
+		<sapn class = "tv_d">电视产品</sapn>
+		<span>查看更多 ></span>
+	</div>
+	<div>
+		<a href="#">CHIQ电视</a>
+		<a href="#">激光电视</a>
+		<a href="#">4K超高清电视</a>
+		<a href="#">HDR电视</a>
+		<a href="#">智能语音电视</a>
+	</div>
+</div>
+</div>
+<!-- 右边块 -->
+<div class = "q_3">
+<div class = "laser_out">
+	<div class = "laser">
+		<div class = "laser_img">
+			<img src="img/laser.jpg">
+		</div>
+		<div class = "laser_right">
+			<ul class = "laser_ul">
+             
+			</ul>
+		</div>
+	</div>
+</div>
+</div>
+<!-- 空调产品开始 -->
+<div class = "q_2">
+<div class = "shop_tv" id = "iii">
+	<div class = "shop_right">
+		<sapn class = "tv_d">空调产品</sapn>
+		<span id = "blue">查看更多 ></span>
+	</div>
+	<div>
+		<a href="#">CHIQ空调</a>
+		<a href="#">壁挂式</a>
+		<a href="#">立柜式</a>
+	</div>
+</div>
+</div>
+<!-- 空调右边 -->
+<div class = "q_3">
+<div class = "laser_out">
+	<div class = "laser">
+		<div class = "laser_img">
+			<img src="img/laser_1.jpg">
+		</div>
+		<div class = "laser_right">
+			<ul class = "laser_ul laser_condition">
+
+			</ul>
+		</div>
+	</div>
+</div>
+</div>
+<!-- 美玲冰洗 -->
+<div class = "q_2">
+<div class = "shop_tv">
+	<div class = "shop_right">
+		<sapn class = "tv_d">美玲冰洗</sapn>
+		<span id="yellow">查看更多 ></span>
+	</div>
+	<div>
+		<a href="#">冰箱</a>
+		<a href="#">洗衣机</a>
+	</div>
+</div>
+</div>
+<!-- 美菱冰洗右边 -->
+<div class = "q_3">
+<div class = "laser_out">
+	<div class = "laser">
+		<div class = "laser_img">
+			<img src="img/laser_cool.jpg">
+		</div>
+		<div class = "laser_right">
+			<ul class = "laser_ul laser_cool">
+
+			</ul>
+		</div>
+	</div>
+</div>
+</div>
+<!-- 生活家电 -->
+<div class = "q_2">
+<div class = "shop_tv">
+	<div class = "shop_right">
+		<sapn class = "tv_d">生活家电</sapn>
+		<span id = "purple">查看更多 ></span>
+	</div>
+	<div>
+		<a href="#">生活电器</a>
+		<a href="#">厨卫大电</a>
+		<a href="#">厨卫小电</a>
+	</div>
+</div>
+</div>
+<!-- 生活家电右边 -->
+<div class = "q_3">
+<div class = "laser_out">
+	<div class = "laser">
+		<div class = "laser_img">
+			<img src="img/laser_life.jpg">
+		</div>
+		<div class = "laser_right">
+			<ul class = "laser_ul laser_life">
+
+			</ul>
+		</div>
+	</div>
+</div>
+</div>
+<!-- 周边产品 -->
+<div class = "q_2">
+<div class = "shop_tv">
+	<div class = "shop_right">
+		<sapn class = "tv_d">周边产品</sapn>
+	</div>
+	<div>
+	</div>
+</div>
+</div>
+<!-- 周边产品右边 -->
+<div class = "q_3">
+<div class = "laser_out">
+	<div class = "laser">
+		<div class = "laser_img " id="img_around">
+			<img src="img/laser_around.jpg">
+		</div>
+		<div class = "laser_right">
+			<ul class = "laser_ul laser_around">
+
+			</ul>
+		</div>
+	</div>
+</div>
+</div>
+<div class = "fixed">
+	<ul class = "hot">
+		<li class = "one">热门</li>
+		<li class = "two">电视</li>
+		<li class = "three">空调</li>
+		<li class = "four">冰洗</li>
+		<li class = "five">生活</li>
+		<li class = "six">周边</li>
+	</ul>
+</div>
+<script type="text/javascript">
+
+	$(".hot .one").click(function(){
+$('html,body').stop().animate({scrollTop:"480px"}, 500);
+	})
+    $(".hot .two").click(function(){
+$('html,body').stop().animate({scrollTop:"819px"}, 500);
+	})
+    $(".hot .three").click(function(){
+$('html,body').stop().animate({scrollTop:"1498px"}, 500);
+	})
+    $(".hot .four").click(function(){
+$('html,body').stop().animate({scrollTop:"2177px"}, 500);
+	})
+	$(".hot .five").click(function(){
+$('html,body').stop().animate({scrollTop:"2869px"}, 500);
+	})
+	$(".hot .six").click(function(){
+$('html,body').stop().animate({scrollTop:"3548px"}, 500);
+	})
+</script>
+<!-- 右侧快速回到顶部 -->
+<div class = "backtop">
+	<ul class = "lastul">
+		<li class = "linklogin"><img src = "img/shop_top.png"/>
+             <div id="numb">
+             	
+             </div>
+		</li>
+		<li><img src = "img/shop_middle.png"/></li>
+		<li class = "lastli"><img src = "img/shop_bottom.png"/></li>
+	</ul>
+</div>
+<script type="text/javascript">
+$(".lastli").click(function(){
+    var timer = setInterval(function(){
+	var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+	scrollTop -= 150;
+
+	document.body.scrollTop = scrollTop;
+	document.documentElement.scrollTop = scrollTop;
+
+	document.title = scrollTop;
+	if(scrollTop <= 0){
+		clearInterval(timer);
+	}
+       }, 30); 		
+})
+
+ $(".linklogin").click(function(){
+	open("detailgoods.html","detailgoods");
+})
+</script>
+<!-- 最低部分开始 -->
+<div class = "traffic">
+	<div class = "traffic_in">
+		<div class = "traffic_left">
+			<img src = "img_bottom/01.png">
+			<div class = "traffic_font">
+			<p><b>物流快线</b></p>
+			<p>及时响应准时送达</p>
+			</div>
+		</div>
+		<div class = "traffic_left">
+			<img src = "img_bottom/02.png">
+			<div class = "traffic_font">
+			<p><b>售后网点</b></p>
+			<p>20000余家售后网点</p>
+			</div>
+		</div>
+		<div class = "traffic_left">
+			<img src = "img_bottom/03.png">
+			<div class = "traffic_font">
+			<p><b>无忧保修</b></p>
+			<p>7*24小时售后热线</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class = "listtable">
+	<div class = "listtable_in">
+		<div class = "listright">
+				<ul class ="bottom_ul">
+				    <li>品牌渠道</li>
+					<li>美菱冰箱</li>
+					<li>长虹京东</li>
+					<li>长虹国美</li>
+					<li>长虹天猫</li>
+					<li>长虹苏宁</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>服务支持</li>
+					<li>产品查询</li>
+					<li>维修服务</li>
+					<li>延保服务</li>
+					<li>下载中心</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>长虹集团</li>
+					<li>公司动态</li>
+					<li>投资者关系</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>商务合作</li>
+					<li>经销商登录</li>
+					<li>供应商登录</li>
+					<li>服务商登录</li>
+				</ul>
+				<div class="position">
+					<sapn>积分商城</sapn>
+					<span>购物指南</span>
+				</div>
+		</div>
+		<div class = "listmiddle">
+		  <p><img src = "img_bottom/duihua.png" /><span>在线客服</span></p>
+		  <p><img src = "img_bottom/xiaoxi.png" /><span>问题反馈</span></p>
+		  <p class = "tell">4008-111-666</p>
+		  <p class = "tell">4006-111-666</p>
+		</div>
+		<div class = "listleft">
+		<img src = "img_bottom/erweima.png" />
+		</div>
+	</div>
+</div>
+<div class = "police">
+	<p><img src = "img_bottom/长虹.png" /></p>
+	<p>蜀ICP备09001737 | © 2017 四川长虹电器股份有限公司 版权所有</p>
+	<p>地址：四川省绵阳市高新区绵兴东路35号</p>
+	<p><img src = "img_bottom/police.png"/></p>
+</div>
+<!-- 最低结束 -->
+<!-- 广告窗口的自动关闭开始 -->
+<div id = "ad">
+    <img id = "delete" src = "img/cuo.png" />
+	<img src = "img/ad.png"/>
+</div>
+<script type="text/javascript">
+	$("#delete").click(function(){
+		$("#ad").css("display","none");
+		clearInterval(timer_ad);
+	})
+    var count = 3;
+    var timer_ad = setInterval(function(){
+    	count--;
+    	if(count==0){
+    		$("#ad").css("display","none");
+    		clearInterval(timer_ad);
+    	}
+    },1000)	 
+</script>
+<script type="text/javascript">
+$(function(){
+	//database();
+    var string = $.cookie("goods");
+    var brr = JSON.parse(string);
+
+    $(".you").on("click",".delect",function(){
+            //alert(this.id);         
+    	//var jishu = $(this).parent().parent().index();
+ 	        // removeItemFromArr(_id,brr);
+			$(this).parent().parent().remove(); 
+            var _id = this.id;
+            var string = $.cookie("goods");
+       		var arr = JSON.parse(string);
+       		arr.splice(_id,1);
+       		var newstring = JSON.stringify(arr);
+            $.cookie("goods",newstring);
+            database();
+            goodsnum();//计数函数
+            if($(".wuliaoshop").children().size() ==0){
+            	$(".jiesuan").css("display","none");
+            }else if($(".wuliaoshop").children()){
+            	$(".jiesuan").css("display","block");
+            }
+    })
+
+
+
+/*function removeItemFromArr(item, arr){
+      arr.splice(item,1);
+      var newstring = JSON.stringify(arr);
+      $.cookie("goods",newstring); 
+      database(); 
+}*/
+
+		function database(){
+			$.ajax({
+		    	url:"ajax/allgoods.json",
+		    	type:"GET",
+		    	success:function(data){
+		            var str = $.cookie("goods");
+			        var arr = JSON.parse(str); 
+			        var html=""; 
+			        var summoney = 0;
+			          for(var i=0;i<arr.length;i++){
+			          	html+='<li><p class = "hover">'+data[arr[i].id].name+'</p><p><span>'+"单价:"+'</span><span class = "monprice">'+data[arr[i].id].price+'</span><span>'+"×"+'</span><span>'+arr[i].num+'</span><span class="delect" id="'+i+'">'+"删除"+'</span></p></li>';
+		              // 获取当前商品价格
+		                var stringprice = data[arr[i].id].price.substring(1);
+		                // 获取当前购买数量
+		                var stringnum = arr[i].num;
+		                //计算该商品的总价款
+		                totalmony = stringprice * stringnum;
+		                // alert(totalmony);
+		                summoney += totalmony;  
+			          }
+
+		              $(".true_p").html("￥"+summoney);
+			          $(".wuliaoshop").html(html);
+
+
+				  if($(".wuliaoshop").children().size() ==0){
+					   $(".jiesuan").css("display","none");
+					   $(".present").css("display","block");
+					}else{
+					   $(".jiesuan").css("display","block");
+					   $(".present").css("display","none");
+					}
+		    	}
+			})
+		}
+           goodsnum();//窗口刷新仍显示
+	// cookie缓存
+$(".laser_ul").delegate("li","click",function(){
+		var id = this.id;
+		//判断是否是第一次创建名为goods
+		var first = $.cookie("goods") == null ? true : false;
+		if(first){
+			$.cookie("goods",'[{"id":' + id + ',"num":1}]')
+		}else{
+			//取出goods的键值
+			var str = $.cookie("goods");
+			var arr = JSON.parse(str);//将字符串转为数组
+			// 判断是否添加过该商品
+			var isyes = false;
+			for(var i in arr){
+				if(arr[i].id ==id){ //说明添加过
+					arr[i].num++;
+					isyes = true;
+					// 再将变化的数据转换成字符串存回
+				}
+			}
+			if(!isyes){
+				var obj ={id:this.id,num:1};
+				arr.push(obj);
+			}
+
+			$.cookie("goods",JSON.stringify(arr));
+		}
+
+		goodsnum();//调用计数函数
+       //alert($.cookie("goods"));
+       // 计算购物车总数量显示在右侧边栏中
+	})
+
+       function goodsnum(){
+       		var string = $.cookie("goods");
+       		var brr = JSON.parse(string);
+       		var sum = null;
+       		for(var i in brr){
+       			sum = sum + Number(brr[i].num);
+       		}
+       		$("#numb").html(sum);
+       }
+	      
+    $("#shopcar").hover(function(){
+    	$("#you").css("display","block");
+    	database();
+    },function(){
+    	$("#you").css("display","none");
+    })
+
+
+    $("#you").mouseenter(function(){
+    	$(this).css("display","block");
+    })
+    $("#you").mouseleave(function(){
+    	$(this).css("display","none");
+    }) 
+
+	  /*跳转结算页面*/
+	$(".kj").click(function(){
+		open("detailgoods.html","detailgoods");
+	})
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+*{margin:0;padding:0;}
+body{background:#f9f9f9;}
+a{
+  text-decoration: none;
+  color:black;
+}
+ul,li{list-style: none}
+/*----------------------------*/
+.head{
+	width:100%;
+	height:35px;
+	background:#333333;
+}
+.head_in{
+    width:1240px;
+    height:100%;
+    margin:0 auto;
+    display: flex;
+	justify-content: space-between; 
+}
+.head_in .left a{
+   width:145px;
+   height:35px;
+   color:white;
+   font-size: 13px;
+   float:left;
+   display:flex;
+   justify-content: center;
+   align-items: center;
+}
+.head_in .left a:hover{
+	background:#555555;
+}
+.active{
+	background:red;
+}
+.head_in .right a{
+   height:35px;	
+   color:white;
+   float:left;
+   display:flex;
+   font-size: 13px;
+   justify-content: center;
+   align-items: center;
+   margin-left:10px;
+}
+#register{background:url(../img/header.png) no-repeat right center;}
+#register:hover{
+	color:red;
+}
+#login:hover{
+	color:red;
+}
+/*------------------*/
+.car_shop{
+	width:100%;
+	height:80px;
+	background:white;
+}
+.car_shop_in{
+	width:1240px;
+	margin:0 auto;
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+}
+/*详情页*/
+.middle_list{
+	width:100%;
+	background:#f9f9f9;
+	min-height: 500px;
+}
+.detail_goods{
+	display:block;
+	width:1240px;
+	height:auto;
+	overflow: hidden;
+	margin:0 auto;
+}
+/*new*/
+.detail_goods .wai{
+	width:1240px;
+	height:165px;
+	/*background:black;*/
+	background: white;
+	padding:0;
+	margin-top: 10px;
+}
+.detail_goods .wai .left_1{
+	width:49px;
+	height:165px;
+	border-right:1px solid #f7f7f7;
+	/*background:yellow;*/
+	float:left;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+.detail_goods .wai .top_1{
+	width:1190px;
+	height:39px;
+	border-bottom: 1px solid #f7f7f7;
+	/*background:orange;*/
+	float:right;
+}
+.detail_goods .wai .bottom_1{
+	width:1190px;
+	height:125px;
+/*	background:red;*/
+	float:right;
+	display: flex;
+	align-items: center;
+}
+.detail_goods .wai .bottom_1 .image{
+	height:125px;
+	margin-right:40px;
+}
+.name{
+	width:200px;
+}
+.price{width:100px;color:red;}
+.top_1 img{float:right;
+	cursor: pointer;
+}
+.right_bottom_ul{width:200px;height:40px;
+	margin-left:10px;margin-right: 100px}
+.right_bottom_ul li{
+	float:left;
+	border:1px solid #d4d4d4;
+	height:38px;
+}
+.bottom_ul_1,.bottom_ul_3{cursor: pointer;}
+#bottom_ul_2{
+	width:77px;
+	text-align: center;
+	line-height: 38px;
+	border-left: none;
+	border-right: none;
+	background:white;
+}
+/*.detail_goods li{
+	width:100%;
+	height:190px;
+	background:white;
+	margin-top:10px;
+	margin-bottom: 15px;
+	position:relative;
+}
+.detail_goods li img{
+    width:160px;
+    height:160px;
+    float:left;
+    margin-right:50px;
+}
+.detail_goods li span{
+	float:left;
+	height:160px;
+	line-height: 160px;
+	width:auto;
+	margin-right: 20px;
+}
+
+.detail_goods li span:nth-child(even){
+	font-size: 20px;
+}
+.detail_goods li span:nth-child(5){
+	color:red;
+}
+.detail_goods li input{
+	float:right;
+	height:160px;
+	font-size: 20px;
+	border:none;
+	color:red;
+	background:white;
+	margin-right: 10px;
+}*/
+.totlemoney{
+	width:100%;
+	height:160px;
+	position:fixed;
+	left:0;
+	bottom:0;
+	background:rgba(0,0,0,0.6);
+	z-index:10;
+}
+.totlemoney button{
+	position:absolute;
+	width:200px;
+	height:40px;
+	border:none;
+	background:#f12020;
+	color:white;
+}
+.totlemoney button:nth-child(1){
+    right:300px;
+    bottom:10px;
+}
+.totlemoney button:nth-child(2){
+	cursor: pointer;
+    right:5px;
+    bottom:10px;
+}
+.police{
+	margin-bottom:165px;
+}

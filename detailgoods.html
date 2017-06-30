@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/detailgoods.css"/>
+<link rel="stylesheet" type="text/css" href="css/bottom.css"/>
+<title>购物详情页</title>
+<script type="text/javascript" src = "js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src = "js/jquery.cookie.js"></script>
+<script type="text/javascript">
+$(function(){
+	data();
+    var string = $.cookie("goods");
+    var brr = JSON.parse(string);
+		$(".detail_goods").on("click", ".top_2", function(){
+			//删除cookie		
+			var jishu = $(this).parent().parent().index();
+	        removeItemFromArr(jishu,brr);
+			$(this).parent().parent().remove();
+
+			  if($(".detail_goods").children().size() ==0){
+			  		$(".summoney").html("总计：￥ 0");
+			  }
+		})
+
+        $(".detail_goods").on("click",".bottom_ul_3",function(){
+        	//var num = $(this).parent().parent().parent().index();
+            var id = this.id;   
+        	plusnum(id,brr);
+        })
+
+        $(".detail_goods").on("click",".bottom_ul_1",function(){
+        	var num = $(this).parent().parent().parent().index();
+        	subtraction(num,brr);
+        })
+})
+
+
+function subtraction(item,arr){
+	   arr[item].num--;
+	if(arr[item].num-- <= 0){
+		arr[item].num = 0;
+	}
+	  var newstring = JSON.stringify(arr);
+  		$.cookie("goods",newstring);
+  		data();
+}
+
+function plusnum(item,arr){
+  		arr[item].num++;
+  		var newstring = JSON.stringify(arr);
+  		$.cookie("goods",newstring);
+  		data();
+ }
+
+
+function removeItemFromArr(item, arr){
+      arr.splice(item,1);
+      var newstring = JSON.stringify(arr);
+      $.cookie("goods",newstring);  
+      data();
+}
+
+function data(){
+	    $.ajax({
+    	url:"ajax/allgoods.json",
+    	type:"GET",
+    	success:function(data){
+            var str = $.cookie("goods");
+	        var arr = JSON.parse(str); 
+	        var html="";
+	        var summoney = 0;
+	        var totalmony = 0;	        
+	        for(var i=0;i<arr.length;i++){
+	        	html+='<li class = "wai"><div class="left_1"><input type="checkbox" /></div><div class="top_1"><img id="'+i+'" class = "top_2" src ="img/dele.png"></div><div class="bottom_1"><img class="image" src="'+data[arr[i].id].img+'"/><span class="name">'+data[arr[i].id].name+'</span><span>'+"单价:"+'</span><span class = "price">'+data[arr[i].id].price+'</span><span>'+"购买数量:"+'</span><ul class = "right_bottom_ul"><li class = "bottom_ul_1"><img src="img_subpage/jian.png" /></li><li id = "bottom_ul_2">'+arr[i].num+'</li><li class = "bottom_ul_3" id = "'+i+'"><img src = "img_subpage/jia.png"></li></ul><span>'+"有货"+'</span></div></li>'
+
+	        	$(".detail_goods").html(html);
+	        	// 当前商品单价
+	        	var stringprice = data[arr[i].id].price.substring(1);
+                // 获取当前购买数量
+                var stringnum = arr[i].num;	     
+                //计算该商品的总价款
+                totalmony = stringprice * stringnum;  	
+                summoney = summoney + totalmony;
+                $(".summoney").html("总计：￥"+summoney);
+	        }         
+    	}
+    })		
+}
+</script>
+</head>
+<body>
+<!-- 导航开始 -->
+<div class = "head">
+	<div class = "head_in">
+		<div class = "left">
+		 	<a href="#" class = "active">长虹官网</a>
+		 	<a href="#">关于长虹</a>
+		 	<a href="#">商务合作</a>
+		 	<a href="#">English</a>
+		</div>
+		<div class = "right">
+		 	<a id = "register" href ="#">登录&ensp;</a>
+		 	<a id = "login" href ="#">&ensp;注册</a>
+		 	<a id = "myhong" class="myhong" href = "#">我的长虹</a>
+		 	<a href = "#">消息</a>
+		 	<a href ="#">(0)</a>
+		 	<a id = "shopcar" class="shopcar" href = "#">购物车</a>
+	 	</div>
+	</div>
+</div>
+<!-- 导航结束 -->
+<!-- 购物车导航开始 -->
+<div class = "car_shop">
+	<div class = "car_shop_in">
+		<img src = "img/logo.png" />
+		<img src = "img/process.png" />
+	</div>
+</div>
+<!-- 购物车导航结束 -->
+<!-- 购买商品详情展示开始 -->
+<div class = "middle_list">
+	<ul class = "detail_goods">	
+	</ul>
+</div>
+<!-- 购买商品详情展示结束 -->
+<!-- 总价悬浮框开始 -->
+<div class = "totlemoney">
+     <!-- 存放总价款 -->
+     <button class = "summoney">总计：￥0</button>
+	<button>立即结算</button>
+</div>
+<!-- 总价悬浮框结束 -->
+<!-- 尾部开始 -->
+<div class = "traffic">
+	<div class = "traffic_in">
+		<div class = "traffic_left">
+			<img src = "img_bottom/01.png">
+			<div class = "traffic_font">
+			<p><b>物流快线</b></p>
+			<p>及时响应准时送达</p>
+			</div>
+		</div>
+		<div class = "traffic_left">
+			<img src = "img_bottom/02.png">
+			<div class = "traffic_font">
+			<p><b>售后网点</b></p>
+			<p>20000余家售后网点</p>
+			</div>
+		</div>
+		<div class = "traffic_left">
+			<img src = "img_bottom/03.png">
+			<div class = "traffic_font">
+			<p><b>无忧保修</b></p>
+			<p>7*24小时售后热线</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class = "listtable">
+	<div class = "listtable_in">
+		<div class = "listright">
+				<ul class ="bottom_ul">
+				    <li>品牌渠道</li>
+					<li>美菱冰箱</li>
+					<li>长虹京东</li>
+					<li>长虹国美</li>
+					<li>长虹天猫</li>
+					<li>长虹苏宁</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>服务支持</li>
+					<li>产品查询</li>
+					<li>维修服务</li>
+					<li>延保服务</li>
+					<li>下载中心</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>长虹集团</li>
+					<li>公司动态</li>
+					<li>投资者关系</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>商务合作</li>
+					<li>经销商登录</li>
+					<li>供应商登录</li>
+					<li>服务商登录</li>
+				</ul>
+				<div class="position">
+					<sapn>积分商城</sapn>
+					<span>购物指南</span>
+				</div>
+		</div>
+		<div class = "listmiddle">
+		  <p><img src = "img_bottom/duihua.png" /><span>在线客服</span></p>
+		  <p><img src = "img_bottom/xiaoxi.png" /><span>问题反馈</span></p>
+		  <p class = "tell">4008-111-666</p>
+		  <p class = "tell">4006-111-666</p>
+		</div>
+		<div class = "listleft">
+		<img src = "img_bottom/erweima.png" />
+		</div>
+	</div>
+</div>
+<div class = "police">
+	<p><img src = "img_bottom/长虹.png" /></p>
+	<p>蜀ICP备09001737 | © 2017 四川长虹电器股份有限公司 版权所有</p>
+	<p>地址：四川省绵阳市高新区绵兴东路35号</p>
+	<p><img src = "img_bottom/police.png"/></p>
+</div>
+<!-- 尾部结束 -->
+</body>
+</html>

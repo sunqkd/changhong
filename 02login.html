@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/login.css" />
+<link rel="stylesheet" type="text/css" href="css/bottom.css" />
+<script type="text/javascript" src = "js/jquery-1.10.1.min.js"></script>
+<title>注册界面</title>
+<style type="text/css">
+.active{
+	background:#e42121;
+}
+#myhong,#shopcar{width:100px;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+//跳转注册页面
+$("#login").click(function(){
+	open("02login.html","02login");
+})
+$("#register").click(function(){
+	open("01register.html","01register");
+})
+// 我的长虹和购物车选项卡
+    $("#myhong").hover(function(){
+    	$("#my").css("display","block");
+    },function(){
+    	$("#my").css("display","none");
+    })
+
+    $("#shopcar").hover(function(){
+    	$("#you").css("display","block");
+    },function(){
+    	$("#you").css("display","none");
+    })
+
+
+
+$("#dim").click(function(){
+	$("#code").attr("value",abc(4));//设置属性
+})
+//四位数验证码的生成函数
+	function abc(n){
+			var arr=[];
+			for(var i=0;i<n;i++){
+			var a = parseInt(Math.random() *100);
+			if(a<=9){
+            	arr.push(a);
+			}else if(a>=65&&a<=90){
+				arr.push(String.fromCharCode(a));
+			}else if(a>=17&&a<=42){
+				arr.push(String.fromCharCode(a+80));
+			}
+			else{
+				i--;//无效数字
+			}
+		  }
+		  return arr.join("");
+		}
+//手机号码验证开始
+var cellphone = document.getElementById("cellphone");
+var cellphong_1 = document.getElementById("cellphone_1");
+var cellphone_2 = document.getElementById("cellphone_2");
+cellphone.onblur = function(){
+var oValue = cellphone.value.replace(/\s/ig, "");//删除空格	
+        cellphone.value = oValue;
+        if(oValue==""){
+        	cellphong_1.innerHTML = "× 请输入手机号";
+        	cellphone_2.style.display = "none";
+        }else{
+        	if(!(/^1[3|4|5|7|8][0-9]\d{8}$/.test(oValue))){
+   	    			cellphong_1.innerHTML = "× 不是正确的手机号";
+   	    			cellphone_2.style.display = "none";
+                }else{
+                	cellphone_2.style.display = "block";
+                	cellphong_1.innerHTML = "";
+                }
+        }
+}
+//手机号码验证结束
+//密码验证开始
+var password = document.getElementById("password");
+var password_if=document.getElementById("password_if");
+var password_1 = document.getElementById("password_1");
+    password.onblur = function(){
+        var oValues = password.value.replace(/\s/ig, "");//删除空格	
+        password.value = oValues;
+        if(oValues==""){
+        	password_if.innerHTML = "× 请输入密码";
+        	password_if.style.color = "red";
+        	password_1.style.display = "none";
+        }else{
+        	if(oValues.length >= 8 && oValues.length <=16){
+        		password_if.innerHTML = "密码长度8~16位";
+        		password_if.style.color = "#98a4bf";
+                password_1.style.display = "block";
+        	}else{
+        		password_if.innerHTML = "× 密码长度8~16位";
+        		password_if.style.color = "red";
+        		password_1.style.display = "none";
+        	}
+        }
+    }
+//密码验证结束
+
+//确认密码开始
+var conform = document.getElementById("conform");
+var conform_1 = document.getElementById("conform_1");
+var password_3 = document.getElementById("password_3");
+conform.onblur = function(){
+	var oValuess = conform.value.replace(/\s/ig, "");//删除空格	
+        conform.value = oValuess;
+        if(oValuess==""){
+            conform_1.innerHTML = "× 请确认密码";
+            password_3.style.display = "none";
+        }else{
+        	if(conform.value==password.value){
+        		password_3.style.display = "block";
+        		conform_1.innerHTML ="";
+        	}else{
+        		conform_1.innerHTML = "× 两次密码不一致";
+        		password_3.style.display = "none";
+        	}
+        }
+}
+//确认密码结束
+    $("#fuxuan").click(function () {
+        if ($(this).is(":checked")) {
+            $("#lastsapan").css("display","none");
+        }else {
+            $("#lastsapan").css("display","block");
+        }
+    })
+
+}
+</script>
+</head>
+<body>
+<!-- 头文件 -->
+<div id = "head" class = "head">
+	<div class = "left">
+	 	<a href="#" class = "active">长虹官网</a>
+	 	<a href="#">关于长虹</a>
+	 	<a href="#">商务合作</a>
+	 	<a href="#">English</a>
+	</div>
+	<div class = "right">
+	 	<a id = "register" href ="#">登录&ensp;|</a>
+	 	<a id = "login" href ="#">&ensp;注册</a>
+	 	<a id = "myhong" class="myhong" href = "#">我的长虹</a>
+	 	<a href = "#">消息</a>
+	 	<a href ="#">(0)</a>
+	 	<a id = "shopcar" class="shopcar" href = "#">购物车</a>
+		 	<div id = "my" class = "my">
+		 		<img src = "img/my.png">
+		 		<div class = "load">
+		 	     <p><a href = "#" class = "firsta">您好请先登录</a></p>
+		 	     <p><a href = "#" class = "seconda">账户设置</a></p>
+		 		</div>
+		 		<div class = "downa">
+		 			<p><a href = "#" class = "commen">我的订单&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</a><a href = "#">我的预约</a></p>
+		 			<p><a href = "#" class = "commen">家电管家&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</a><a href = "#">服务记录</a></p>
+		 			<p><a href = "#" class = "commen">我的积分&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</a><a href = "#">我的优惠券</a></p>
+		 			<p><a href = "#">我的收藏</a></p>
+		 	   </div>
+		    </div>
+		    <div id = "you" class = "you">
+		 	    <p>购物车中还没有商品,赶紧选购吧</p>
+		    </div>
+	</div>
+</div>
+<!-- 导航部分 -->
+<div class = "navigation">
+	<div class = "logo">
+		<img src = "img/logo.png" />
+	</div>
+	<div class = "fon_t">
+		注册
+	</div>
+</div>
+<!-- 内容 -->
+<div id = "out">
+<div class = "content">
+	<p><label>手机号码</label><input type = "text" id = "cellphone" placeholder="请输入手机号" /><span id = "cellphone_2">√</span></p>
+	<p><span id = "cellphone_1"></span></p>
+
+
+	<p><label>设置密码</label><input type = "password" id = "password" placeholder="请输入密码" /><span id = "password_1">√</span></p>
+	<p><span id = "password_if">密码长度8~16位</span></p>
+
+
+	<p><label>确认密码</label><input id = "conform" type = "password" placeholder="请输入密码"/><span id = "password_3">√</span>
+	</p>
+	<p><span id = "conform_1"></span></p>
+
+
+	<p class = "dispaly"><label>图形验证</label><input id = "picture" type = "text" placeholder="请输入4位验证码" />
+	<input id = "code" type = "button" value="acd2" />
+	<input id = "dim" type = "button" />
+	</p>
+	<p><span></span></p>
+
+
+	<p><label>短信验证</label><input id="message" placeholder="请输入短信验证码" type = "text"/>
+        <span id = "gain" >获取验证码</span>
+	</p>
+	<p><span></span></p>
+
+
+	<p class = "color_span"><span >每个手机号每天只能获取5次验证码</span></p>
+
+
+	<p class = "color_fuxuan color_span"><input id= "fuxuan" type = "checkbox" checked="checked" />我已阅读并接受 版权声明 和 隐私保护 条款</p>
+	<p class = "law"><span id = "lastsapan">×  请阅读并接受 版权声明 和 隐私保护 条款</span></p>
+	<button>注册</button>		
+</div>
+</div>
+
+<!-- 最低部分开始 -->
+<div class = "traffic">
+	<div class = "traffic_in">
+		<div class = "traffic_left">
+			<img src = "img_bottom/01.png">
+			<div class = "traffic_font">
+			<p><b>物流快线</b></p>
+			<p>及时响应准时送达</p>
+			</div>
+		</div>
+		<div class = "traffic_left">
+			<img src = "img_bottom/02.png">
+			<div class = "traffic_font">
+			<p><b>售后网点</b></p>
+			<p>20000余家售后网点</p>
+			</div>
+		</div>
+		<div class = "traffic_left">
+			<img src = "img_bottom/03.png">
+			<div class = "traffic_font">
+			<p><b>无忧保修</b></p>
+			<p>7*24小时售后热线</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class = "listtable">
+	<div class = "listtable_in">
+		<div class = "listright">
+				<ul class ="bottom_ul">
+				    <li>品牌渠道</li>
+					<li>美菱冰箱</li>
+					<li>长虹京东</li>
+					<li>长虹国美</li>
+					<li>长虹天猫</li>
+					<li>长虹苏宁</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>服务支持</li>
+					<li>产品查询</li>
+					<li>维修服务</li>
+					<li>延保服务</li>
+					<li>下载中心</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>长虹集团</li>
+					<li>公司动态</li>
+					<li>投资者关系</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>商务合作</li>
+					<li>经销商登录</li>
+					<li>供应商登录</li>
+					<li>服务商登录</li>
+				</ul>
+				<div class="position">
+					<sapn>积分商城</sapn>
+					<span>购物指南</span>
+				</div>
+		</div>
+		<div class = "listmiddle">
+		  <p><img src = "img_bottom/duihua.png" /><span>在线客服</span></p>
+		  <p><img src = "img_bottom/xiaoxi.png" /><span>问题反馈</span></p>
+		  <p class = "tell">4008-111-666</p>
+		  <p class = "tell">4006-111-666</p>
+		</div>
+		<div class = "listleft">
+		<img src = "img_bottom/erweima.png" />
+		</div>
+	</div>
+</div>
+<div class = "police">
+	<p><img src = "img_bottom/长虹.png" /></p>
+	<p>蜀ICP备09001737 | © 2017 四川长虹电器股份有限公司 版权所有</p>
+	<p>地址：四川省绵阳市高新区绵兴东路35号</p>
+	<p><img src = "img_bottom/police.png"/></p>
+</div>
+</body>
+</html>

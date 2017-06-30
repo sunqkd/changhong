@@ -1,0 +1,159 @@
+*{margin:0;padding:0;}
+a{
+  text-decoration: none;
+}
+ul{list-style: none}
+/*--------------头部-----------------------------------*/
+.head{
+	height:35px;
+	background:#333333;
+	padding:0px 100px;
+	display: flex;
+	justify-content: space-between; 
+}
+.head .left a{
+   width:145px;
+   height:35px;
+   color:white;
+   font-size: 13px;
+   float:left;
+   display:flex;
+   justify-content: center;
+   align-items: center;
+}
+.head .left a:hover{
+	background:#555555;
+}
+.active{
+	background:#555555;
+}
+.head .right a{
+   height:35px;	
+   color:white;
+   float:left;
+   display:flex;
+   font-size: 13px;
+   justify-content: center;
+   align-items: center;
+   margin-left:10px;
+}
+.head .right .myhong:hover{
+	background:#555555;
+}
+.head .right .shopcar:hover{
+	background:#555555;
+}
+.head .right{position:relative;}
+#register:hover{
+	color:red;
+}
+#login:hover{
+	color:red;
+}
+/*我的长虹对话框*/
+.my{
+	width:230px;
+	height:220px;
+	position:absolute;
+	padding:17px 17px 25px 24px;
+	left:99px;
+	top:35px;
+	z-index: 2;
+	background:white;
+	display:none;
+	box-shadow:1px 1px 1px #eaeaea,1px 1px 1px #ececec,1px 1px 1px #efefef,
+	-1px 0 1px #eaeaea,-1px 0 1px #ececec,-1px 0 1px #efefef;
+}
+
+.my img{float:left;}
+.my .load{float:left;} 
+.my .load p a{color:blue;}
+.my .load .firsta{font-size:18px}
+.my .downa{float:left;}
+.my .downa p a{color:#666666;}
+.my .downa p .commen{background:url(../img/shu.png) no-repeat right center;
+margin-right: 35px;;
+}
+/*购物车对话框*/
+.you{
+	width:315px;
+	height:60px;
+	position:absolute;
+	top:35px;
+	right:0px;
+	color:#666666;
+	z-index: 2;
+	line-height: 60px;
+	text-align: center;
+	box-shadow:1px 1px 1px #eaeaea,1px 1px 1px #ececec,1px 1px 1px #efefef,
+	-1px 0 1px #eaeaea,-1px 0 1px #ececec,-1px 0 1px #efefef;
+	display: none;
+	background:white;
+}
+/*导航部分*/
+.navigation{
+	width:100%;
+	height:80px;
+	border-bottom: 1px solid #e1e1e1;
+}
+.logo{
+	float:left;
+	margin-left: 100px;
+}
+.fon_t{
+	float:left;
+	height:80px;
+	width:80px;
+	display:flex;
+	font-size: 25px;
+	justify-content: center;
+	align-items: center;
+	background:url(../img/login.png) left center no-repeat;
+}
+
+/*内容部分*/
+.out{
+	width:100%;
+	height:auto;
+	padding-top:100px;
+	background:#f8f8f8;
+}
+.content{
+	width:335px;
+	height:325px;
+	/*border:1px solid red;*/
+	margin:0px auto;
+	text-align: center;
+}
+.content input{
+	width:320px;
+	height:35px;
+	margin-bottom:25px;
+}
+.forget{
+	float:right;
+	color:red;
+	margin-bottom:25px;
+	cursor: pointer;
+
+}
+.login{
+	text-align: center;
+	line-height: 33px;
+	border:none;
+	color:white;
+	background:red;
+	cursor: pointer;
+}
+.register{
+    text-align: center;
+	line-height: 33px;
+	border:none;
+	border:1px solid #e2e2e2;
+	background: white;
+	cursor: pointer;
+}
+.register:hover{
+	border:1px solid red;
+	color:red;
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/register.css" />
+<link rel="stylesheet" type="text/css" href="css/bottom.css" />
+<script type="text/javascript" src = "js/jquery-1.10.1.min.js"></script>
+<title>登录界面</title>
+<style type="text/css">
+.active{
+	background:#e42121;
+}
+#myhong,#shopcar{width:100px;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+//跳转注册页面
+$("#login").click(function(){
+	open("02login.html","02login");
+})
+$("#register").click(function(){
+	open("01register.html","01register");
+})
+	// 我的长虹和购物车选项卡
+    $("#myhong").hover(function(){
+    	$("#my").css("display","block");
+    },function(){
+    	$("#my").css("display","none");
+    })
+
+    $("#shopcar").hover(function(){
+    	$("#you").css("display","block");
+    },function(){
+    	$("#you").css("display","none");
+    })
+    // 点击跳转界面	
+$(".register").click(function(){
+		open("02login.html","02login");
+   })
+}
+</script>
+</head>
+<body>
+<!-- 头文件 -->
+<div id = "head" class = "head">
+	<div class = "left">
+	 	<a href="#" class = "active">长虹官网</a>
+	 	<a href="#">关于长虹</a>
+	 	<a href="#">商务合作</a>
+	 	<a href="#">English</a>
+	</div>
+	<div class = "right">
+	 	<a id = "register" href ="#">登录&ensp;|</a>
+	 	<a id = "login" href ="#">&ensp;注册</a>
+	 	<a id = "myhong" class="myhong" href = "#">我的长虹</a>
+	 	<a href = "#">消息</a>
+	 	<a href ="#">(0)</a>
+	 	<a id = "shopcar" class="shopcar" href = "#">购物车</a>
+		 	<div id = "my" class = "my">
+		 		<img src = "img/my.png">
+		 		<div class = "load">
+		 	     <p><a href = "#" class = "firsta">您好请先登录</a></p>
+		 	     <p><a href = "#" class = "seconda">账户设置</a></p>
+		 		</div>
+		 		<div class = "downa">
+		 			<p><a href = "#" class = "commen">我的订单&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</a><a href = "#">我的预约</a></p>
+		 			<p><a href = "#" class = "commen">家电管家&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</a><a href = "#">服务记录</a></p>
+		 			<p><a href = "#" class = "commen">我的积分&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</a><a href = "#">我的优惠券</a></p>
+		 			<p><a href = "#">我的收藏</a></p>
+		 	   </div>
+		    </div>
+		    <div id = "you" class = "you">
+		 	    <p>购物车中还没有商品,赶紧选购吧</p>
+		    </div>
+	</div>
+</div>
+<div class = "navigation">
+	<div class = "logo">
+		<img src = "img/logo.png" />
+	</div>
+	<div class = "fon_t">
+		登录
+	</div>
+</div>
+<!-- 内容开始 -->
+<div class = "out">
+	<div class = "content">
+	<form>
+	    <p><input type = "text" placeholder="手机号/邮箱/用户名" /></p>
+	    <p><input type = "password" placeholder="请输入密码" /></p>
+	    <p class ="forget"><a>忘记密码?</a></p>
+		<p><input class= "login" type = "button" value = "登录"/></p>
+		<p><input class = "register" type = "button" value = "注册长虹账号"/></p>
+	</form>
+	</div>
+</div>
+<!-- 底部 -->
+<!-- 最低部分开始 -->
+<div class = "traffic">
+	<div class = "traffic_in">
+		<div class = "traffic_left">
+			<img src = "img_bottom/01.png">
+			<div class = "traffic_font">
+			<p><b>物流快线</b></p>
+			<p>及时响应准时送达</p>
+			</div>
+		</div>
+		<div class = "traffic_left">
+			<img src = "img_bottom/02.png">
+			<div class = "traffic_font">
+			<p><b>售后网点</b></p>
+			<p>20000余家售后网点</p>
+			</div>
+		</div>
+		<div class = "traffic_left">
+			<img src = "img_bottom/03.png">
+			<div class = "traffic_font">
+			<p><b>无忧保修</b></p>
+			<p>7*24小时售后热线</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class = "listtable">
+	<div class = "listtable_in">
+		<div class = "listright">
+				<ul class ="bottom_ul">
+				    <li>品牌渠道</li>
+					<li>美菱冰箱</li>
+					<li>长虹京东</li>
+					<li>长虹国美</li>
+					<li>长虹天猫</li>
+					<li>长虹苏宁</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>服务支持</li>
+					<li>产品查询</li>
+					<li>维修服务</li>
+					<li>延保服务</li>
+					<li>下载中心</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>长虹集团</li>
+					<li>公司动态</li>
+					<li>投资者关系</li>
+				</ul>
+				<ul class ="bottom_ul">
+				    <li>商务合作</li>
+					<li>经销商登录</li>
+					<li>供应商登录</li>
+					<li>服务商登录</li>
+				</ul>
+				<div class="position">
+					<sapn>积分商城</sapn>
+					<span>购物指南</span>
+				</div>
+		</div>
+		<div class = "listmiddle">
+		  <p><img src = "img_bottom/duihua.png" /><span>在线客服</span></p>
+		  <p><img src = "img_bottom/xiaoxi.png" /><span>问题反馈</span></p>
+		  <p class = "tell">4008-111-666</p>
+		  <p class = "tell">4006-111-666</p>
+		</div>
+		<div class = "listleft">
+		<img src = "img_bottom/erweima.png" />
+		</div>
+	</div>
+</div>
+<div class = "police">
+	<p><img src = "img_bottom/长虹.png" /></p>
+	<p>蜀ICP备09001737 | © 2017 四川长虹电器股份有限公司 版权所有</p>
+	<p>地址：四川省绵阳市高新区绵兴东路35号</p>
+	<p><img src = "img_bottom/police.png"/></p>
+</div>
+</body>
+</html>
